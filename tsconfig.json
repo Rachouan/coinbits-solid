@@ -1,0 +1,27 @@
+{
+  "include": ["./src", "./types", "./**/*.json", "vite.config.ts"],
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "types": ["vite/client"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": false,
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "baseUrl": "./",
+    "paths": {
+      "@app/*": ["src/*"]
+    },
+    "noEmit": true,
+    "strict": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
+  }
+}
