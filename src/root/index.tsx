@@ -1,9 +1,11 @@
+import AppLoader from "@app/components/app-loader";
+import AuthPage from "@app/pages/auth";
 import BuyBitcoinPage from "@app/pages/buy-bitcoin";
 import Dashboard from "@app/pages/dashboard";
 import AppShell from "@app/structures/app-shell";
-import { Routes, Route } from "@solidjs/router";
+import { Routes, Route, Navigate } from "@solidjs/router";
 
-export default function Root() {
+const RootShell = () => {
   return (
     <AppShell>
       <Routes>
@@ -12,4 +14,24 @@ export default function Root() {
       </Routes>
     </AppShell>
   );
+};
+
+export default function Root() {
+  let content;
+
+  switch ("unauth") {
+    case "unauth":
+      content = (
+        <Routes>
+          <Route path="/auth/*" element={<AuthPage />} />
+          <Route path="/" element={<Navigate href="/auth" />} />
+        </Routes>
+      );
+      break;
+    default:
+      content = <RootShell />;
+      break;
+  }
+
+  return <AppLoader>{content}</AppLoader>;
 }
