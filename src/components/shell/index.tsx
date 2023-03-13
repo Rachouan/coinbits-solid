@@ -14,8 +14,8 @@ const Shell: Component<AppShellProps> = ({ children, navigation }) => {
           {navigation}
         </aside>
       )}
-      <article class="flex-grow py-6 overflow-y-scroll">
-        <Container>{children}</Container>
+      <article class="flex-grow py-8 overflow-y-scroll">
+        <Container size="xl">{children}</Container>
       </article>
     </section>
   );

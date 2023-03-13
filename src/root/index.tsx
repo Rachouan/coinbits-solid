@@ -19,8 +19,10 @@ const RootShell = () => {
 export default function Root() {
   let content;
 
-  switch ("unauth") {
-    case "unauth":
+  const status: { state: "unauthed" | "authed" } = { state: "authed" };
+
+  switch (status.state) {
+    case "unauthed":
       content = (
         <Routes>
           <Route path="/auth/*" element={<AuthPage />} />
