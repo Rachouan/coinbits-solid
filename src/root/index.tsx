@@ -19,7 +19,7 @@ const RootShell = () => {
 export default function Root() {
   let content;
 
-  const status: { state: "unauthed" | "authed" } = { state: "authed" };
+  const status: { state: "unauthed" | "authed" } = { state: "unauthed" };
 
   switch (status.state) {
     case "unauthed":
