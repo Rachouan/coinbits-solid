@@ -5,6 +5,8 @@ import { Motion } from "@motionone/solid";
 import { Link, Navigate, Route, Routes, useLocation } from "@solidjs/router";
 import { createEffect, createSignal } from "solid-js";
 
+const [isSignUp, setIsSignup] = createSignal<boolean>(false);
+const [loading, setLoading] = createSignal<boolean>(false);
 const [email, setEmail] = createSignal<string>("");
 
 const AuthForm = () => {
@@ -13,17 +15,19 @@ const AuthForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      setTimeout(() => console.log("Email is", email()), 2000);
-    } finally {
-      setLoading(false);
-    }
+      await setTimeout(() => {
+        console.log("Email is", email());
+        setLoading(false);
+      }, 2000);
+    } catch (error) {}
   };
-  const [isSignUp, setIsSignup] = createSignal<boolean>(false);
-  const [loading, setLoading] = createSignal<boolean>(false);
+
+  const isValid = email().length > 0;
 
   createEffect(() => {
     setIsSignup(location.pathname.includes("signup"));
-  }, [location]);
+    console.log("is valid", isValid);
+  }, [location, isValid]);
 
   return (
     <div class="flex flex-col gap-y-6 text-center">
@@ -41,7 +45,9 @@ const AuthForm = () => {
           required
           classes="flex-grow"
         />
-        <Button loading={loading()}>Get Started</Button>
+        <Button loading={loading()} disabled={isValid}>
+          Get Started
+        </Button>
       </form>
       {!isSignUp() ? (
         <p class="text-sm">
